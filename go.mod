@@ -1,4 +1,4 @@
-module github.com/SilentQianyi/logger
+module github.com/go-meridian/logger
 
 go 1.22.0
 

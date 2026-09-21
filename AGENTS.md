@@ -42,7 +42,7 @@ Lobby 代码中**零 zap 直接引用**，全部通过 logger 包操作。
 
 ```go
 // main.go
-import "github.com/SilentQianyi/logger"
+import "github.com/go-meridian/logger"
 
 // 初始化（丢弃 *zap.Logger 返回值）
 _, err := logger.Init(logCfg)
@@ -130,4 +130,4 @@ log:
 - 旧的 `common/logger` 包已被完全移除，Lobby 中无任何引用
 - 修改 Config 结构体时需考虑向后兼容，Lobby 不一定使用所有字段
 - `field.go` 中新增字段构造函数时需保持与 zap 同名、同签名，方便消费方迁移
-- `mq` 库（`github.com/SilentQianyi/mq`）通过 `logger.Get()` 获取 `*zap.Logger`，修改 `Get()` 签名需同步更新该库
+- `mq` 库（`github.com/go-meridian/mq`）通过 `logger.Get()` 获取 `*zap.Logger`，修改 `Get()` 签名需同步更新该库
