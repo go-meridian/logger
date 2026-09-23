@@ -40,10 +40,10 @@
 自定义 `keyValueEncoder` 实现完整 `zapcore.Encoder`（含 ObjectEncoder 全部 AddXXX），替代 zap 默认 console encoder（tab 分隔、小写 level），输出单行、grep 友好的格式：
 
 ```
-2026-09-23T13:10:36.426+0800 INFO RouteCmd cmd=xxx uid=123 requestId=abc-123
+DATE[2026-09-23T13:10:36.426+0800]  INFO  RouteCmd  cmd=xxx uid=123 requestId=abc-123
 ```
 
-- 头部固定：`时间 大写级别 消息`，空格分隔
+- 头部固定：`DATE[时间] 大写级别 消息`，双空格分隔
 - 字段用 `key=value`，空格分隔；含空格/引号/反斜杠的值用 `strconv.Quote` 包裹（如 `msg="hello world"`）
 - 基础类型（String/Int/Uint/Bool/Float/Duration/Time/Error/Binary 等）直接序列化
 - 复合类型（Any/Object/Array/Reflect）退化为 JSON 值；`OpenNamespace` 忽略、内部字段平铺
@@ -55,7 +55,8 @@ grep 检索示例：
 grep 'uid=123' app.log            # 按字段精确匹配，无引号转义
 grep 'requestId=abc-123' app.log  # 整条链路追踪
 grep ' ERROR ' app.log            # 只看错误
-grep '^2026-09-23' app.log        # 按天过滤
+grep '^DATE\[' app.log            # 按日志行前缀过滤
+grep 'DATE\[2026-09-23' app.log   # 按天过滤
 ```
 
 ## RequestId 链路追踪（request_id.go）

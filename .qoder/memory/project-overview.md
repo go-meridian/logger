@@ -22,5 +22,5 @@
 | `logger.go` | Init/Get/Close，全局 zap.Logger 管理（atomic.Value + sync.Once 幂等） |
 | `field.go` | zap 字段构造函数的包级导出 |
 | `zap.go` | Logger 封装类型，常用日志方法 + 6 个带 ctx 的 `*Ctx` 方法 |
-| `encoder.go` | 自定义 key=value 编码器，输出 时间 级别 消息 key=value 格式 |
+| `encoder.go` | 自定义 key=value 编码器，输出 DATE[时间] 级别 消息 key=value 格式 |
 | `request_id.go` | RequestId 上下文注入与读取，供 Ctx 日志方法自动附加 |
